@@ -1,6 +1,11 @@
 #!/bin/bash
 
 APP_DIR=/root/DEVOPS/01_BASH/Python_app
+LOG_FILE=./install.log
+
+function log_and_print(){
+    echo "date '+%Y_%m_%d_%h_%m' $1"
+}
 
 function install(){
     #!/bin/bash
@@ -34,5 +39,8 @@ systemctl start python-api.service
 }
 redis-cli save
 mkdir -p /backup
-mv /var/lib/redis/dump.rdb /backup/`date "+%Y_%m_%d"`_redis.backup
 
+
+log_and_print "Przenosze backup do katalogu /backup"
+mv /var/lib/redis/dump.rdb /backup/`date "+%Y_%m_%d"`_redis.backup
+log_and_print "Backup zakonczony"
