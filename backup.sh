@@ -37,7 +37,13 @@ systemctl daemon-reload
 systemctl enable python-api.service
 systemctl start python-api.service
 }
-redis-cli save
+redis-cli save > /dev/null
+
+if [ $? != 0 ];then
+    log_and_print " Backup bledny"
+    exit 2
+fi
+
 mkdir -p /backup
 
 
